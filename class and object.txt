@@ -1,0 +1,402 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Dec 29 14:18:20 2021
+
+@author: pc
+"""
+
+'''
+class:logical entity
+object:physical entity represent memory
+class is a blue print
+based on single blue print:multiple objects are created
+
+'''
+#ex-1:python 3.x:our class is by default child class of object
+
+
+class Myclass1:
+    pass
+class Myclass2():
+    pass
+class Myclass3(object):
+    pass
+print(issubclass(Myclass1, object)) #True
+print(issubclass(Myclass2, object)) #True
+print(issubclass(Myclass3, object)) #True
+
+
+
+
+
+    
+#ex-2:Declaring functions inside the class
+
+class Myclass:
+    def disp1(self):
+        print("good morning") #good morning
+        
+    def disp2(self,name):
+        print('good morning',name) #good morning ramu
+    
+c=Myclass()
+c.disp1()
+c.disp2("ramu")    
+
+
+
+
+
+#ex-3:instance and static method
+
+
+class myclass:
+    def m1(self):
+        
+        print('instance method')#instance method
+    @staticmethod  
+    def m2():
+        print("static method")#static method
+    
+    
+c=myclass()
+c.m1()
+c.m2()    
+
+
+
+
+
+
+#ex-4:declaring variables inside the class to reprsnt class variables always use:self
+#declaring variables outside the class to represnt calss variables use:object.name
+
+
+class myclass:
+    a,b=10,20
+    def add(self):
+        print(self.a+self.b)
+    def mul (self):
+        print(self.a*self.b)
+        
+c=myclass()
+c.add() #30
+c.mul()   #200    
+print(c.a)#10
+print(c.b) #20
+
+
+
+
+
+
+
+
+#ex-5:local var,class var,global var with differnt names
+i,j=100,200  #global variables
+class myclass:
+    a,b=10,20 #class varibles
+    def add(self,x,y): #local variables
+        print(x+y) #20010
+        print(self.a+self.b)#30
+        print(i+j) #300
+    
+    
+c=myclass()
+c.add(10, 20000)    
+
+
+
+
+
+#ex-6:local var,class var,global var with same names
+a,b=100,200
+class myclass:
+    a,b=10,20
+    def add(self,a,b):
+        print(a+b) #2
+        print(self.a+self.b) #30
+        print(globals()['a']+globals()['b'])#300
+        
+        
+c=myclass()
+c.add(1, 1)
+
+
+
+
+
+
+
+#ex-7:one class with Multiple objects
+
+class myclass:
+    def disp1(self):
+        print("good morning")
+        
+c1=myclass()
+c1.disp1()    #good morning
+
+c2=myclass()
+c2.disp1()    #good morning 
+
+
+
+
+#ex-8: named object:c1=myclass():object with refernce
+#nameless object:myclass():object without refernce
+
+class myclass:
+    def disp(self):
+        print('good morning')
+        
+#named object
+c=myclass()
+c.disp() #good morning
+
+
+
+#nameless object
+myclass().disp()    #good morning
+
+
+
+
+
+
+
+
+
+#ex-9:id():to print memory address
+
+#is ,isnot:memory comparision
+
+class myclass:
+    pass
+c1=myclass()
+c2=myclass()
+c3=c1
+
+print(id(c1)) #2002663893360
+print(id(c2)) #2002663892400
+print(id(c3)) #2002663893360    
+
+print(c1 is c2) #False
+print(c1 is c3) #True
+
+
+
+
+
+
+#ex-10:
+class myclass:
+    name='ratan'  #class varible
+c1=myclass()
+print(c1.name)#ratan
+
+c1.name='anu'
+print(c1.name) #anu
+
+c2=myclass()
+print(c2.name)#ratan   
+
+
+
+#ex-11:declaring contructor inside the class:__init__()
+
+class myclass:
+    def m1(self):
+        print('hi good morning')
+        
+    def __init__(self):
+        print('0 arg contructor')
+
+
+c=myclass() #contructor arguments are excecuted when object is created
+c.m1()     #mthods are exccuted by calling the method
+
+
+
+#ex-12:
+    
+class myclass:
+    def values(self,val1,val2):  #local variables
+        print(val1)
+        print(val2)
+        
+        #conversion of local varibles to class variables 
+        self.val1=val1
+        self.val2=val2
+    def add(self):
+        print(self.val1+self.val2)
+    def mul(self):
+        print(self.val1*self.val2)
+        
+        
+c=myclass()
+c.values(10, 20) # 10 20
+c.add() #30
+c.mul() #200      
+        
+        
+#ex-13 call the methods by using self.m1() 
+
+
+class myclass:
+    def m1(self):
+        print('m1 method')
+        self.m2(10)
+    def m2(self,a):
+        print('m2 method:',a)
+        
+        
+c=myclass() 
+c.m1()  #m1 method
+        # m2 method: 10  
+  
+
+
+#ex-14 
+
+class myclass:
+    name='durga'
+    def __init__(self,name):
+        print('good morning',name)    #good morning ratan
+        print('good morning',self.name) #good morning durga
+        
+c=myclass('ratan')
+
+
+
+
+
+
+
+
+#ex-15 conversion of local varibles to class variables
+
+class operations:
+    def __init__(self,n1,n2): #local varibles
+        print(n1) 
+        print(n2)
+        
+   #conversion of local variables to class variables     
+        self.n1=n1
+        self.n2=n2
+        
+    def add(self):
+         print(self.n1+self.n2)
+         
+    def mul(self):
+         print(self.n1*self.n2)
+         
+o=operations(200, 254)   #200     254
+o.add()  #454
+o.mul()   #50800      
+
+
+
+
+
+
+
+
+#ex-16
+
+class emp:
+    def __init__(self,eid,ename,esal):#local variables
+        #conversion of local variables to class variables
+        self.eid=eid
+        self.ename=ename
+        self.esal=esal
+        
+    def disp(self):
+        print("emp id:{}  emp name :{}  emp esal:{}".format(self.eid,self.ename,self.esal))
+              
+e1=emp(111, 'srikanth', 25455) 
+e1.disp() #emp id:111  emp name :srikanth  emp esal:25455
+
+e2=emp(215, 'manu', 50000)   
+e2.disp()    #emp id:215  emp name :manu  emp esal:50000
+
+
+
+
+
+
+
+#ex-17  __str__ :it will be excecuted when we print ref-var
+
+#case1
+
+class myclass:
+    pass
+c=myclass()
+print(c) #<__main__.myclass object at 0x000001D24814F8B0>
+
+
+#case2:
+
+
+class myclass:
+    def __str__(self):
+        return "ratan"
+c=myclass()
+print(c)     #ratan
+
+#case3
+
+class myclass:
+    def __str__(self):
+        return 10
+    
+c=myclass()
+#print(c)    #TypeError: __str__ returned non-string (type int)
+            
+
+#case4
+class myclass:
+    def __str__(self):
+        print('ratan')
+#TypeError: __str__ returned non-string (type int)
+        
+c=myclass()
+#print(c)        
+
+
+
+
+
+#ex-18
+class emp:
+    def __init__(self,eid,ename,esal):#local variables
+        #conversion of local variables to class variables
+        self.eid=eid
+        self.ename=ename
+        self.esal=esal
+        
+    def __str__(self):
+        return "emp id:{}  emp name :{}  emp esal:{}".format(self.eid,self.ename,self.esal)
+              
+e1=emp(111, 'srikanth', 25455) 
+print(e1) #emp id:111  emp name :srikanth  emp esal:25455
+
+e2=emp(215, 'manu', 50000)   
+print(e2)   #emp id:215  emp name :manu  emp esal:50000
+
+
+
+
+
+#ex-19  __del__:executed when we destroy object
+
+class myclass():
+    def __del__(self):
+        print('object destroyed')
+        
+c1=myclass() 
+c2=myclass()
+del c1   
+del c2    
+        
